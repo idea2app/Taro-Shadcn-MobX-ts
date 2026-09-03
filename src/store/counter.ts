@@ -1,19 +1,18 @@
-import { makeAutoObservable } from 'mobx'
+import { action, observable } from 'mobx';
 
 export class CounterStore {
-    counter = 1
+  @observable
+  accessor counter = 1;
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+  @action
+  addCount() {
+    this.counter++;
+  }
 
-    addCount() {
-        this.counter++
-    }
-
-    reduceCount() {
-        this.counter--
-    }
+  @action
+  reduceCount() {
+    this.counter--;
+  }
 }
 
-export default new CounterStore()
+export default new CounterStore();

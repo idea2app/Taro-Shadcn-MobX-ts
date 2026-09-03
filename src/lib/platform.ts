@@ -1,3 +1,1 @@
-export function isH5(): boolean {
-    return import.meta.env.VITE_VPT_TARGET === 'h5'
-}
+export const isH5 = (): boolean => import.meta.env.VITE_VPT_TARGET === 'h5'

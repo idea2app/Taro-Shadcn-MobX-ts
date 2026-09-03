@@ -16,16 +16,16 @@ const items = [
 
 export const MainNav: FC<MainNavProps> = ({ path }) => (
     <View className="fixed inset-x-0 bottom-0 z-50 flex flex-row border-t border-border bg-background">
-        {items.map(item => (
+        {items.map(({ path: itemPath, label }) => (
             <View
-                key={item.path}
+                key={itemPath}
                 className={cn(
                     'flex flex-1 flex-col items-center justify-center gap-1 py-2 text-xs font-medium',
-                    path === item.path ? 'text-primary' : 'text-muted-foreground'
+                    path === itemPath ? 'text-primary' : 'text-muted-foreground'
                 )}
-                onClick={() => Taro.redirectTo({ url: `/pages/${item.path}/index` })}
+                onClick={() => Taro.redirectTo({ url: `/pages/${itemPath}/index` })}
             >
-                <Text>{item.label}</Text>
+                <Text>{label}</Text>
             </View>
         ))}
     </View>

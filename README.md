@@ -5,8 +5,8 @@ Taro scaffold for Web &amp; mini-app, based on TypeScript, Vite, React, Tailwind
 Built with:
 
 - [VPT (vite-plugin-taro)](https://vpt.js.org/llms.txt) — Vite 8 + React 19 + Taro build tool-chain for WeChat Mini Program & H5.
-- [taro-shadcn](https://github.com/louisyoungx/taro-shadcn) — Shadcn UI components adapted for Taro.
-- [MobX](https://mobx.js.org/) & [mobx-restful](https://github.com/idea2app/mobx-restful) for state management & data fetching.
+- [Taro-Shadcn](https://github.com/louisyoungx/taro-shadcn) — Shadcn UI components adapted for Taro.
+- [MobX](https://mobx.js.org/) & [MobX-RESTful](https://github.com/idea2app/mobx-restful) for state management & data fetching.
 
 It re-implements the example pages of [Taro-Vant-MobX-ts](https://github.com/idea2app/Taro-Vant-MobX-ts):
 
@@ -17,13 +17,13 @@ It re-implements the example pages of [Taro-Vant-MobX-ts](https://github.com/ide
 ## Development
 
 ```sh
-npm install
+pnpm install
 
 # WeChat Mini Program
-npm run dev:wx
-npm run build:wx
+pnpm dev:wx
+pnpm build:wx
 
 # H5 / Web
-npm run dev:h5
-npm run build:h5
+pnpm dev:h5
+pnpm build:h5
 ```

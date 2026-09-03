@@ -4,8 +4,6 @@ import './app.css'
 
 configure({ useProxies: 'never', enforceActions: 'never' })
 
-function App({ children }: PropsWithChildren) {
-    return <>{children}</>
-}
+const App = ({ children }: PropsWithChildren) => <>{children}</>
 
 export default App
