@@ -7,6 +7,9 @@ catalog:
 overrides:
     '@types/react': 'catalog:'
 
+autoInstallPeers: false
+minimumReleaseAge: 0
+
 allowBuilds:
     '@parcel/watcher': true
     '@swc/core': true

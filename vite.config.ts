@@ -10,7 +10,7 @@ import {
   projectConfigJson,
   projectPrivateConfigJson,
   sitemapJson
-} from './config/taro.ts';
+} from './project.config.ts';
 
 const targetEnvName = 'VITE_VPT_TARGET';
 const projectRoot = fileURLToPath(new URL('.', import.meta.url));
