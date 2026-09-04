@@ -38,7 +38,7 @@
     "lint-staged": "^17.4.1",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "rolldown": "^1.2.7",
+    "rolldown": "1.2.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "unplugin-swc": "^1.5.11",
@@ -60,12 +60,12 @@
     "*.{md,js,ts,tsx,json,yml}": "prettier --write"
   },
   "scripts": {
-    "dev:wx": "cross-env NODE_ENV=development VITE_VPT_TARGET=wx vite",
-    "dev:h5": "cross-env NODE_ENV=development VITE_VPT_TARGET=h5 vite",
-    "build:wx": "cross-env NODE_ENV=production VITE_VPT_TARGET=wx vite build",
-    "build:h5": "cross-env NODE_ENV=production VITE_VPT_TARGET=h5 vite build",
-    "preview:h5": "cross-env NODE_ENV=production VITE_VPT_TARGET=h5 vite preview --outDir dist/h5",
-    "typecheck": "tsc -b",
-    "test": "lint-staged"
+    "prepare": "husky || true",
+    "dev-wx": "cross-env NODE_ENV=development VITE_VPT_TARGET=wx vite",
+    "dev-h5": "cross-env NODE_ENV=development VITE_VPT_TARGET=h5 vite",
+    "build-wx": "cross-env NODE_ENV=production VITE_VPT_TARGET=wx vite build",
+    "build-h5": "cross-env NODE_ENV=production VITE_VPT_TARGET=h5 vite build",
+    "preview-h5": "cross-env NODE_ENV=production VITE_VPT_TARGET=h5 vite preview --outDir dist/h5",
+    "test": "lint-staged  &&  tsc --noEmit"
   }
 }
