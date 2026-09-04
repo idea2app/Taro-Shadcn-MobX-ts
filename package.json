@@ -1,0 +1,71 @@
+{
+  "name": "taro-shadcn-mobx-ts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Taro scaffold for Web & mini-app, based on TypeScript, Vite, React, Tailwind CSS & Shadcn UI.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@vant/area-data": "^2.2.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "event-target-shim": "^6.0.2",
+    "koajax": "^3.3.1",
+    "lodash.debounce": "^4.0.8",
+    "lucide-react-taro": "^1.5.2",
+    "mobx": "^7.0.3",
+    "mobx-github": "^0.7.1",
+    "mobx-i18n": "^0.7.9",
+    "mobx-react": "^10.0.2",
+    "mobx-restful": "^2.1.5",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwind-merge": "^3.6.0",
+    "taro-fetch-polyfill": "^0.5.8",
+    "web-utility": "^4.7.2"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.16.1",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/lodash.debounce": "^4.0.9",
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "cross-env": "^10.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.4.1",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "rolldown": "^1.2.7",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "unplugin-swc": "^1.5.11",
+    "vite": "8.2.2",
+    "vite-plugin-taro": "^0.6.20"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "prettier": {
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "singleQuote": true,
+    "jsxSingleQuote": true
+  },
+  "lint-staged": {
+    "*.{md,js,ts,tsx,json,yml}": "prettier --write"
+  },
+  "scripts": {
+    "dev:wx": "cross-env NODE_ENV=development VITE_VPT_TARGET=wx vite",
+    "dev:h5": "cross-env NODE_ENV=development VITE_VPT_TARGET=h5 vite",
+    "build:wx": "cross-env NODE_ENV=production VITE_VPT_TARGET=wx vite build",
+    "build:h5": "cross-env NODE_ENV=production VITE_VPT_TARGET=h5 vite build",
+    "preview:h5": "cross-env NODE_ENV=production VITE_VPT_TARGET=h5 vite preview --outDir dist/h5",
+    "typecheck": "tsc -b",
+    "test": "lint-staged"
+  }
+}

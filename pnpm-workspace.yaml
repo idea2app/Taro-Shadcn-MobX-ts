@@ -1,0 +1,17 @@
+packages:
+  - .
+
+catalog:
+  '@types/react': ^19.2.18
+
+overrides:
+  '@types/react': 'catalog:'
+
+autoInstallPeers: false
+minimumReleaseAge: 0
+
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  core-js: true
+  esbuild: true
