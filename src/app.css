@@ -1,48 +1,48 @@
-@import "tailwindcss/theme.css";
-@import "tailwindcss/preflight.css";
-@import "tailwindcss/utilities.css";
+@import 'tailwindcss/theme.css';
+@import 'tailwindcss/preflight.css';
+@import 'tailwindcss/utilities.css';
 
 @source "./";
 
 @theme static {
-    --color-background: #ffffff;
-    --color-foreground: #0f172a;
-    --color-primary: #16a34a;
-    --color-primary-foreground: #f0fdf4;
-    --color-secondary: #f1f5f9;
-    --color-secondary-foreground: #0f172a;
-    --color-destructive: #dc2626;
-    --color-destructive-foreground: #fef2f2;
-    --color-accent: #f1f5f9;
-    --color-accent-foreground: #0f172a;
-    --color-muted: #f8fafc;
-    --color-muted-foreground: #64748b;
-    --color-border: #e2e8f0;
-    --color-input: #e2e8f0;
-    --color-ring: #16a34a;
-    --color-card: #ffffff;
-    --color-card-foreground: #0f172a;
-    --color-muted-foreground: #64748b;
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-primary: #16a34a;
+  --color-primary-foreground: #f0fdf4;
+  --color-secondary: #f1f5f9;
+  --color-secondary-foreground: #0f172a;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #fef2f2;
+  --color-accent: #f1f5f9;
+  --color-accent-foreground: #0f172a;
+  --color-muted: #f8fafc;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #16a34a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-muted-foreground: #64748b;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 page,
 body {
-    margin: 0;
-    background: var(--color-background);
-    color: var(--color-foreground);
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 button {
-    line-height: inherit;
+  line-height: inherit;
 }
 
 /* https://docs.taro.zone/en/docs/use-h5#span-default-representation-is-block-level-style */
 span {
-    display: inline;
+  display: inline;
 }
