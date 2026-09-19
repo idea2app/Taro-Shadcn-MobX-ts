@@ -1,7 +1,6 @@
 import '@/store/service';
 
 import { RepositoryModel } from 'mobx-github';
-import { View, Text } from 'virtual:taro/components';
 
 import { MainNav } from '@/components/MainNav';
 import { ScrollList } from '@/components/ScrollList';
@@ -11,34 +10,37 @@ import { i18n } from '@/store/Translation';
 const repositoryStore = new RepositoryModel('idea2app');
 
 const InterfacePage = () => (
-  <View className='flex h-full flex-col overflow-hidden pb-16'>
+  <ul className='flex h-screen flex-col overflow-hidden pb-16'>
     <ScrollList
-      className='flex-1'
+      className='min-h-0 flex-1'
       translator={i18n}
       store={repositoryStore}
       renderList={allItems => (
-        <View className='flex flex-col gap-2 p-4'>
-          {allItems.map(({ full_name, description }) => (
+        <li className='flex flex-col gap-2 p-4'>
+          {allItems.map(({ full_name, description, html_url }) => (
             <Card key={full_name}>
               <CardContent className='flex flex-col gap-1 p-4'>
-                <Text className='text-sm font-semibold text-foreground'>
+                <a
+                  className='text-sm font-semibold text-foreground'
+                  href={html_url}
+                  target='_blank'
+                >
                   {full_name}
-                </Text>
+                </a>
 
                 {description && (
-                  <Text className='text-xs text-muted-foreground'>
+                  <span className='text-xs text-muted-foreground'>
                     {description}
-                  </Text>
+                  </span>
                 )}
               </CardContent>
             </Card>
           ))}
-        </View>
+        </li>
       )}
     />
-
     <MainNav path='interface' />
-  </View>
+  </ul>
 );
 
 export default InterfacePage;

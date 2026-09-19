@@ -1,19 +1,20 @@
-import * as React from 'react';
-import * as TaroComponents from 'virtual:taro/components';
+import { Fragment, type PropsWithChildren, type FC } from 'react';
 import { createPortal } from 'react-dom';
+import * as TaroComponents from 'virtual:taro/components';
+
 import { isH5 } from '@/lib/platform';
 
-const RootPortal = (TaroComponents as any).RootPortal;
+const { RootPortal } = TaroComponents as any;
 
-const Portal = ({ children }: { children: React.ReactNode }) => {
-  if (isH5()) {
-    if (typeof document === 'undefined') return <>{children}</>;
-    return createPortal(children, document.body);
-  }
-  if (!RootPortal) {
-    return <>{children}</>;
-  }
-  return <RootPortal>{children}</RootPortal>;
+export const Portal: FC<PropsWithChildren> = ({ children }) => {
+  if (isH5())
+    return typeof document === 'undefined' ? (
+      <>{children}</>
+    ) : (
+      createPortal(children, document.body)
+    );
+
+  const Wrapper = RootPortal || Fragment;
+
+  return <Wrapper>{children}</Wrapper>;
 };
-
-export { Portal };

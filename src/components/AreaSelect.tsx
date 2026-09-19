@@ -2,7 +2,6 @@ import { areaList } from '@vant/area-data';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
-import { View, Text } from 'virtual:taro/components';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -78,13 +77,13 @@ export class AreaSelect extends Component<AreaSelectProps> {
 
     return (
       <>
-        <View className='flex flex-row items-center justify-between border-b border-border px-4 py-3'>
-          <Text className='text-sm font-medium text-foreground'>{title}</Text>
+        <div className='flex flex-row items-center justify-between border-b border-border px-4 py-3'>
+          <span className='text-sm font-medium text-foreground'>{title}</span>
 
           <Button variant='ghost' size='sm' onClick={this.show}>
             {this.displayName || '请选择地区'}
           </Button>
-        </View>
+        </div>
 
         <Drawer open={open} onOpenChange={value => (this.open = value)}>
           <DrawerContent className='max-h-[70vh]'>
@@ -92,42 +91,42 @@ export class AreaSelect extends Component<AreaSelectProps> {
               <DrawerTitle>{title}</DrawerTitle>
             </DrawerHeader>
 
-            <View className='flex max-h-[50vh] flex-col gap-1 overflow-y-auto px-4 pb-4'>
+            <ul className='flex max-h-[50vh] flex-col gap-1 overflow-y-auto px-4 pb-4'>
               {!provinceCode &&
                 Object.entries(provinceList).map(([code, name]) => (
-                  <View
+                  <li
                     key={code}
                     className='rounded-md px-3 py-2 text-sm hover:bg-accent'
                     onClick={() => this.pickProvince(code)}
                   >
-                    <Text>{name}</Text>
-                  </View>
+                    <span>{name}</span>
+                  </li>
                 ))}
 
               {provinceCode &&
                 !cityCode &&
                 childrenOf(cityList, provinceCode, 1).map(([code, name]) => (
-                  <View
+                  <li
                     key={code}
                     className='rounded-md px-3 py-2 text-sm hover:bg-accent'
                     onClick={() => this.pickCity(code)}
                   >
-                    <Text>{name}</Text>
-                  </View>
+                    <span>{name}</span>
+                  </li>
                 ))}
 
               {provinceCode &&
                 cityCode &&
                 childrenOf(countyList, cityCode, 2).map(([code, name]) => (
-                  <View
+                  <li
                     key={code}
                     className='rounded-md px-3 py-2 text-sm hover:bg-accent'
                     onClick={() => this.pickCounty(code)}
                   >
-                    <Text>{name}</Text>
-                  </View>
+                    <span>{name}</span>
+                  </li>
                 ))}
-            </View>
+            </ul>
           </DrawerContent>
         </Drawer>
       </>

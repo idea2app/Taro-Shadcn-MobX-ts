@@ -1,5 +1,5 @@
 import { Event, EventTarget } from 'event-target-shim';
-import { defaultHTTPRuntime, HTTPToolkit, type Request } from 'koajax';
+import { defaultHTTPRuntime, HTTPToolkit } from 'koajax';
 import { githubClient } from 'mobx-github';
 import { Blob, fetch, Headers, ReadableStream } from 'taro-fetch-polyfill';
 
@@ -15,23 +15,8 @@ const { request } = new HTTPToolkit({
   fetch: fetch as typeof globalThis.fetch
 });
 
-/**
- * @see {@link https://github.com/NervJS/taro/pull/17472}
- */
-export function baseRequest<B>(
-  this: { baseURI: string },
-  { path, ...option }: Request<B>
-) {
-  const { pathname, search } = new URL(path, this.baseURI);
-
-  return request<B>({
-    ...option,
-    path: `${this.baseURI}${pathname.slice(1)}${search}`
-  });
-}
-
 if (!isH5()) {
   githubClient.baseURI = 'https://bazaar.fcc-cd.dev/api/GitHub/';
 
-  githubClient.baseRequest = baseRequest;
+  githubClient.baseRequest = request;
 }
