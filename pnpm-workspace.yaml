@@ -2,7 +2,7 @@ packages:
   - .
 
 catalog:
-  '@types/react': ^19.2.18
+  '@types/react': ^19.3.0
 
 overrides:
   '@types/react': 'catalog:'

@@ -48,6 +48,7 @@
     "vite-plugin-taro": "^0.7.4"
   },
   "resolutions": {
+    "@types/react": "$@types/react",
     "idb-keyval": "npm:taro-idb-keyval"
   },
   "browserslist": [
