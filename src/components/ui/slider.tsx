@@ -239,14 +239,14 @@ const Slider = React.forwardRef<
         onMouseDown={handleMouseDown}
         {...props}
       >
-        <View
+        <div
           className={cn(
             'relative grow overflow-hidden rounded-full bg-secondary',
             orientation === 'horizontal' ? 'h-1 w-full' : 'w-1 h-full',
             trackClassName
           )}
         >
-          <View
+          <div
             className={cn(
               'absolute bg-primary',
               orientation === 'horizontal' ? 'h-full' : 'w-full bottom-0',
@@ -258,8 +258,8 @@ const Slider = React.forwardRef<
                 : { height: `${percentage}%` }
             }
           />
-        </View>
-        <View
+        </div>
+        <div
           className={cn(
             'absolute block h-3 w-3 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50',
             isDragging && 'ring-4 ring-primary ring-opacity-30',

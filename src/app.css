@@ -38,11 +38,10 @@ body {
   color: var(--color-foreground);
 }
 
-button {
-  line-height: inherit;
+.taro_page {
+  overflow: hidden !important;
 }
 
-/* https://docs.taro.zone/en/docs/use-h5#span-default-representation-is-block-level-style */
-span {
-  display: inline;
+button {
+  line-height: inherit;
 }

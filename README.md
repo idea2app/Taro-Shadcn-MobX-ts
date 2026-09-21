@@ -21,9 +21,9 @@ Run `pnpm dev-h5` to preview them in a browser.
 
 ## Technology stack
 
-- Language: [TypeScript v7][2]
+- Language: [TypeScript v6][2]
 - Component engine: [React v19][3]
-- State management: [MobX v7][4] + [MobX-RESTful][10]
+- State management: [MobX v6][4] + [MobX-RESTful][10]
 - Component suite: [Shadcn UI for Taro][5] + [Tailwind CSS v4][11]
 - Build toolchain: [Vite v8][12] + [VPT][6]
 - CI / CD: GitHub [Actions][13] + [WeChat miniprogram-ci][14]
@@ -108,6 +108,10 @@ pnpm build-wx
 
 Production files are generated in `dist/h5/` or `dist/wx/`. The GitHub Actions
 workflow uploads the WeChat build when its required repository secrets are set.
+
+## Reference
+
+1. https://wechat-miniprogram.github.io/miniprogram-compat/
 
 [1]: https://docs.taro.zone/
 [2]: https://www.typescriptlang.org/

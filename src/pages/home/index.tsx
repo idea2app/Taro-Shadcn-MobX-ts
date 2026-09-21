@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react';
-import { View, Text } from 'virtual:taro/components';
 
 import { MainNav } from '@/components/MainNav';
 import { Button } from '@/components/ui/button';
@@ -7,8 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import counterStore from '@/store/counter';
 
 const HomePage = observer(() => (
-  <View className='flex h-full flex-col overflow-hidden pb-16'>
-    <View className='flex flex-1 flex-col items-center justify-center gap-6 p-6'>
+  <div className='flex h-full flex-col overflow-hidden pb-16'>
+    <div className='flex flex-1 flex-col items-center justify-center gap-6 p-6'>
       <Card className='w-full max-w-sm'>
         <CardHeader>
           <CardTitle>MobX Counter</CardTitle>
@@ -19,17 +18,17 @@ const HomePage = observer(() => (
             -
           </Button>
 
-          <Text className='w-10 text-center text-2xl font-semibold text-foreground'>
+          <span className='w-10 text-center text-2xl font-semibold text-foreground'>
             {counterStore.counter}
-          </Text>
+          </span>
 
           <Button onClick={() => counterStore.addCount()}>+</Button>
         </CardContent>
       </Card>
-    </View>
+    </div>
 
     <MainNav path='home' />
-  </View>
+  </div>
 ));
 
 export default HomePage;

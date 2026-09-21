@@ -5,6 +5,8 @@ import type { DataObject, Filter, ListModel } from 'mobx-restful';
 import { Component, type ReactNode } from 'react';
 import { ScrollView } from 'virtual:taro/components';
 
+import { cn } from '@/lib/utils';
+
 export interface ScrollListProps<T extends DataObject = DataObject> {
   className?: string;
   style?: Record<string, string | number>;
@@ -46,7 +48,7 @@ export class ScrollList<T extends DataObject = DataObject> extends Component<
 
     return (
       <ScrollView
-        className={className}
+        className={cn('overflow-y-auto', className)}
         style={style}
         scrollY
         onScrollToLower={this.loadMore}

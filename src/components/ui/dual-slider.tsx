@@ -1,4 +1,6 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { Component } from 'react';
 import { createSelectorQuery } from 'virtual:taro/api';
 import { View, type CommonEventFunction } from 'virtual:taro/components';
 import { uniqueID } from 'web-utility';
@@ -20,159 +22,168 @@ export interface DualSliderProps {
  * Built on the same touch/mouse measurement approach as the Shadcn Slider,
  * since the base Slider only supports a single thumb.
  */
-export const DualSlider = forwardRef<any, DualSliderProps>(
-  (
-    { className, value, min = 0, max = 100, step = 1, disabled, onValueChange },
-    ref
-  ) => {
-    const [dragging, setDragging] = useState<0 | 1 | null>(null);
-    const draggingRef = useRef<0 | 1 | null>(null);
-    const rectRef = useRef<Record<'left' | 'width', number> | null>(null);
-    const idRef = useRef(`dual-slider-${uniqueID()}`);
+@observer
+export class DualSlider extends Component<DualSliderProps> {
+  static displayName = 'DualSlider';
 
-    const measure = (callback?: () => void) => {
-      const query = createSelectorQuery();
+  @observable
+  accessor dragging: 0 | 1 | null = null;
 
-      query
-        .select(`#${idRef.current}`)
-        .boundingClientRect(res => {
-          const rect = Array.isArray(res) ? res[0] : res;
+  rect: Record<'left' | 'width', number> | null = null;
+  id = `dual-slider-${uniqueID()}`;
 
-          if (rect) {
-            rectRef.current = { left: rect.left, width: rect.width };
-            callback?.();
-          }
-        })
-        .exec();
-    };
+  componentDidMount() {
+    document?.addEventListener('mousedown', this.handleDocumentMouseDown, true);
+  }
 
-    const percentOf = (num: number) => ((num - min) / (max - min)) * 100;
+  componentWillUnmount() {
+    document?.removeEventListener(
+      'mousedown',
+      this.handleDocumentMouseDown,
+      true
+    );
+  }
 
-    const valueFromPageX = (pageX: number) => {
-      const rect = rectRef.current;
+  measure = (callback?: () => void) => {
+    const query = createSelectorQuery();
 
-      if (!rect) return null;
+    query
+      .select(`#${this.id}`)
+      .boundingClientRect(res => {
+        const rect = Array.isArray(res) ? res[0] : res;
 
-      const percentage = Math.min(
-        Math.max((pageX - rect.left) / rect.width, 0),
-        1
-      );
-      const rawValue = min + percentage * (max - min);
+        if (rect) {
+          this.rect = { left: rect.left, width: rect.width };
+          callback?.();
+        }
+      })
+      .exec();
+  };
 
-      return Math.min(
-        Math.max(Math.round((rawValue - min) / step) * step + min, min),
-        max
-      );
-    };
+  percentOf = (num: number) => {
+    const { min = 0, max = 100 } = this.props;
 
-    const updateValue = (index: 0 | 1, pageX: number) => {
-      const nextPoint = valueFromPageX(pageX);
+    return ((num - min) / (max - min)) * 100;
+  };
 
-      if (nextPoint == null) return;
+  valueFromPageX = (pageX: number) => {
+    const { min = 0, max = 100, step = 1 } = this.props;
 
-      const next: [number, number] = [...value];
+    if (!this.rect) return null;
 
-      next[index] =
-        index === 0
-          ? Math.min(nextPoint, value[1])
-          : Math.max(nextPoint, value[0]);
+    const percentage = Math.min(
+      Math.max((pageX - this.rect.left) / this.rect.width, 0),
+      1
+    );
+    const rawValue = min + percentage * (max - min);
 
-      onValueChange?.(next);
-    };
+    return Math.min(
+      Math.max(Math.round((rawValue - min) / step) * step + min, min),
+      max
+    );
+  };
 
-    const startDrag = (index: 0 | 1, pageX: number) => {
-      if (disabled) return;
+  updateValue = (index: 0 | 1, pageX: number) => {
+    const { value, onValueChange } = this.props;
+    const nextPoint = this.valueFromPageX(pageX);
 
-      draggingRef.current = index;
-      setDragging(index);
-      measure(() => updateValue(index, pageX));
-    };
+    if (nextPoint == null) return;
 
-    const moveDrag = (pageX: number) => {
-      const index = draggingRef.current;
+    const next: [number, number] = [...value];
 
-      if (index == null || disabled) return;
+    next[index] =
+      index === 0
+        ? Math.min(nextPoint, value[1])
+        : Math.max(nextPoint, value[0]);
 
-      updateValue(index, pageX);
-    };
+    onValueChange?.(next);
+  };
 
-    const endDrag = () => setDragging((draggingRef.current = null));
+  startDrag = (index: 0 | 1, pageX: number) => {
+    if (this.props.disabled) return;
 
-    const handleTouchStart =
-      (index: 0 | 1) =>
-      ({ touches, changedTouches }: TouchEvent) => {
-        const touch = touches?.[0] ?? changedTouches?.[0];
+    this.dragging = index;
+    this.measure(() => this.updateValue(index, pageX));
+  };
 
-        if (touch) startDrag(index, touch.pageX);
-      };
+  moveDrag = (pageX: number) => {
+    if (this.dragging === null || this.props.disabled) return;
 
-    const handleTouchMove = ({ touches, changedTouches }: TouchEvent) => {
+    this.updateValue(this.dragging, pageX);
+  };
+
+  endDrag = () => (this.dragging = null);
+
+  handleTouchStart =
+    (index: 0 | 1) =>
+    ({ touches, changedTouches }: TouchEvent) => {
       const touch = touches?.[0] ?? changedTouches?.[0];
 
-      if (touch) moveDrag(touch.pageX);
+      if (touch) this.startDrag(index, touch.pageX);
     };
 
-    const handleMouseDown =
-      (index: 0 | 1) =>
-      ({ pageX }: React.MouseEvent) => {
-        startDrag(index, pageX);
+  handleTouchMove = ({ touches, changedTouches }: TouchEvent) => {
+    const touch = touches?.[0] ?? changedTouches?.[0];
 
-        const onMouseMove = ({ pageX }: MouseEvent) => moveDrag(pageX);
-        const onMouseUp = ({ pageX }: MouseEvent) => {
-          moveDrag(pageX);
-          endDrag();
-          document.removeEventListener('mousemove', onMouseMove);
-          document.removeEventListener('mouseup', onMouseUp);
-        };
+    if (touch) this.moveDrag(touch.pageX);
+  };
 
-        if (typeof document !== 'undefined') {
-          document.addEventListener('mousemove', onMouseMove);
-          document.addEventListener('mouseup', onMouseUp);
-        }
+  handleMouseDown =
+    (index: 0 | 1) =>
+    ({ pageX }: React.MouseEvent) => {
+      this.startDrag(index, pageX);
+
+      const onMouseMove = ({ pageX }: MouseEvent) => this.moveDrag(pageX);
+      const onMouseUp = ({ pageX }: MouseEvent) => {
+        this.moveDrag(pageX);
+        this.endDrag();
+        document?.removeEventListener('mousemove', onMouseMove);
+        document?.removeEventListener('mouseup', onMouseUp);
       };
+      document?.addEventListener('mousemove', onMouseMove);
+      document?.addEventListener('mouseup', onMouseUp);
+    };
 
-    useEffect(() => {
-      if (typeof document === 'undefined') return;
+  handleDocumentMouseDown = (event: MouseEvent) => {
+    const target = event.target as Element;
+    const root = target.closest(`#${this.id}`);
 
-      const listener = (event: MouseEvent) => {
-        const target = event.target as Element;
-        const root = target.closest(`#${idRef.current}`);
+    if (!root) return;
 
-        if (!root) return;
+    const thumbs = [...root.children].slice(1);
+    const index = thumbs.findIndex(
+      thumb => thumb === target || thumb.contains(target)
+    );
 
-        const thumbs = Array.from(root.children).slice(1);
-        const index = thumbs.findIndex(
-          thumb => thumb === target || thumb.contains(target)
-        );
-        if (index >= 0)
-          handleMouseDown(index as 0 | 1)(event as unknown as React.MouseEvent);
-      };
+    if (index >= 0)
+      this.handleMouseDown(index as 0 | 1)(
+        event as unknown as React.MouseEvent
+      );
+  };
 
-      document.addEventListener('mousedown', listener, true);
-
-      return () => document.removeEventListener('mousedown', listener, true);
-    });
+  render() {
+    const { className, value, disabled } = this.props;
+    const { dragging } = this;
 
     return (
       <View
-        ref={ref}
-        id={idRef.current}
+        id={this.id}
         className={cn(
           'relative flex w-full touch-none select-none items-center py-4',
           className
         )}
-        onTouchMove={handleTouchMove as unknown as CommonEventFunction}
-        onTouchEnd={endDrag}
+        onTouchMove={this.handleTouchMove as unknown as CommonEventFunction}
+        onTouchEnd={this.endDrag}
       >
-        <View className='relative h-1 w-full grow overflow-hidden rounded-full bg-secondary'>
-          <View
+        <div className='relative h-1 w-full grow overflow-hidden rounded-full bg-secondary'>
+          <div
             className='absolute h-full bg-primary'
             style={{
-              left: `${percentOf(value[0])}%`,
-              width: `${percentOf(value[1]) - percentOf(value[0])}%`
+              left: `${this.percentOf(value[0])}%`,
+              width: `${this.percentOf(value[1]) - this.percentOf(value[0])}%`
             }}
           />
-        </View>
+        </div>
 
         {value.map((point, index) => (
           <View
@@ -183,16 +194,17 @@ export const DualSlider = forwardRef<any, DualSliderProps>(
               disabled && 'opacity-50'
             )}
             style={{
-              left: `${percentOf(point)}%`,
+              left: `${this.percentOf(point)}%`,
               transform: 'translateX(-50%)'
             }}
             onTouchStart={
-              handleTouchStart(index as 0 | 1) as unknown as CommonEventFunction
+              this.handleTouchStart(
+                index as 0 | 1
+              ) as unknown as CommonEventFunction
             }
           />
         ))}
       </View>
     );
   }
-);
-DualSlider.displayName = 'DualSlider';
+}

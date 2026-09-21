@@ -38,6 +38,10 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: fromRoot('dist', target)
     },
+    define: {
+      URL: 'globalThis.URL',
+      URLSearchParams: 'globalThis.URLSearchParams'
+    },
     plugins: [
       swc.vite({
         tsconfigFile: 'tsconfig.app.json',
@@ -52,6 +56,7 @@ export default defineConfig(({ mode }) => {
         }
       }),
       vpt({
+        polyfills: ['web.url'],
         target,
         app: 'src/app.tsx',
         pages,

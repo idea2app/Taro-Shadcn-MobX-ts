@@ -1,5 +1,4 @@
 import Taro from 'virtual:taro/api';
-import { View, Text } from 'virtual:taro/components';
 import { ArrowLeftRight, Ellipsis, Network } from 'lucide-react-taro';
 import type { FC } from 'react';
 
@@ -16,9 +15,9 @@ const items = [
 ] as const;
 
 export const MainNav: FC<MainNavProps> = ({ path: currentPath }) => (
-  <View className='fixed inset-x-0 bottom-0 z-50 flex flex-row border-t border-border bg-background'>
+  <ul className='fixed inset-x-0 bottom-0 z-50 flex flex-row border-t border-border bg-background'>
     {items.map(({ path, label, icon: Icon }) => (
-      <View
+      <li
         key={path}
         className={cn(
           'flex flex-1 flex-col items-center justify-center gap-1 py-2 text-xs font-medium',
@@ -27,8 +26,8 @@ export const MainNav: FC<MainNavProps> = ({ path: currentPath }) => (
         onClick={() => Taro.redirectTo({ url: `/pages/${path}/index` })}
       >
         <Icon size={20} />
-        <Text>{label}</Text>
-      </View>
+        <span>{label}</span>
+      </li>
     ))}
-  </View>
+  </ul>
 );
