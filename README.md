@@ -66,10 +66,10 @@ Run `pnpm dev-h5` to preview them in a browser.
 
 ### Install dependencies
 
-Node.js 24.11.0 or later and pnpm are required.
+Node.js 24.11.0 or later and pnpm 12.15.0 are required.
 
 ```shell
-npm i pnpm -g
+npm i pnpm@12.15.0 -g
 pnpm i
 ```
 
@@ -114,6 +114,22 @@ pnpm build-wx
 
 Production files are generated in `dist/h5/` or `dist/wx/`. The GitHub Actions
 workflow uploads the WeChat build when its required repository secrets are set.
+
+### Cloudflare Pages
+
+Set the following environment variables for both Production and Preview builds:
+
+- `PNPM_VERSION=12.15.0`
+- `NODE_VERSION=24.11.0` (or a newer version satisfying `package.json`)
+
+Use `pnpm build-h5` as the build command and `dist/h5` as the output directory.
+Keep automatic dependency installation enabled.
+
+The lockfile is generated with PNPM 12. Older Pages defaults such as PNPM 10.11.1
+can reject its overrides configuration with `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH`.
+Use the pinned PNPM version rather than disabling frozen-lockfile checks or
+regenerating the lockfile with an older PNPM version. See the
+[Pages build image documentation](https://developers.cloudflare.com/pages/configuration/build-image/).
 
 ## Reference
 

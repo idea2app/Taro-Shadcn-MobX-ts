@@ -7,6 +7,7 @@
   "engines": {
     "node": ">=24.11.0"
   },
+  "packageManager": "pnpm@12.15.0",
   "dependencies": {
     "@vant/area-data": "^2.2.0",
     "class-variance-authority": "^0.7.1",
