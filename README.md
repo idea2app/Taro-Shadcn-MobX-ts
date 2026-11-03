@@ -66,7 +66,7 @@ Run `pnpm dev-h5` to preview them in a browser.
 
 ### Install dependencies
 
-Node.js 24 or later and pnpm are required.
+Node.js 24.11.0 or later and pnpm are required.
 
 ```shell
 npm i pnpm -g
@@ -85,6 +85,12 @@ pnpm dev-wx
 
 The WeChat build is generated in `dist/wx/`. Import the project root into WeChat
 DevTools after starting the development server.
+
+VPT uses native DOM rendering on WeChat when the SDK supports it, with automatic
+template-rendering fallback otherwise. H5 continues to use browser rendering.
+The app and page configurations enable glass-easel, as required by WeChat DOM rendering.
+React Compiler is enabled for both targets; SWC retains Stage-3 decorator
+support for MobX classes. These options are configured in [vite.config.ts](vite.config.ts).
 
 #### Windows
 

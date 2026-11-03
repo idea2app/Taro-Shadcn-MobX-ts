@@ -7,6 +7,7 @@ catalog:
 overrides:
   '@types/react': 'catalog:'
   idb-keyval: 'npm:taro-idb-keyval'
+  rolldown: 1.2.15
 
 autoInstallPeers: false
 minimumReleaseAge: 0

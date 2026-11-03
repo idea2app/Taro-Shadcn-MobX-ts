@@ -3,19 +3,21 @@ import type { VptJsonObject, VptPageOption } from 'vite-plugin-taro';
 export const pages: VptPageOption[] = [
   {
     path: 'pages/home/index',
-    config: { navigationBarTitleText: '首页' }
+    config: { navigationBarTitleText: '首页', glassEaselWebview: true }
   },
   {
     path: 'pages/component/index',
-    config: { navigationBarTitleText: '高级组件演示' }
+    config: { navigationBarTitleText: '高级组件演示', glassEaselWebview: true }
   },
   {
     path: 'pages/interface/index',
-    config: { navigationBarTitleText: '请求接口' }
+    config: { navigationBarTitleText: '请求接口', glassEaselWebview: true }
   }
 ];
 
 export const appJson: VptJsonObject = {
+  componentFramework: 'glass-easel',
+  glassEaselWebview: true,
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
