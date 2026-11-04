@@ -1,8 +1,9 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import swc from 'unplugin-swc';
 import { defineConfig, loadEnv } from 'vite';
 import vpt, { type VptTarget } from 'vite-plugin-taro';
-import swc from 'unplugin-swc';
 
 import {
   appJson,
@@ -58,6 +59,8 @@ export default defineConfig(({ mode }) => {
       vpt({
         polyfills: ['web.url'],
         target,
+        renderer: 'dom',
+        react: { compiler: true },
         app: 'src/app.tsx',
         pages,
         appJson,

@@ -5,8 +5,9 @@
   "description": "Taro scaffold for Web & mini-app, based on TypeScript, Vite, React, Tailwind CSS & Shadcn UI.",
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "node": ">=24.11.0"
   },
+  "packageManager": "pnpm@12.15.0",
   "dependencies": {
     "@vant/area-data": "^2.2.0",
     "class-variance-authority": "^0.7.1",
@@ -20,32 +21,33 @@
     "mobx-i18n": "^0.7.9",
     "mobx-react": "^9.2.2",
     "mobx-restful": "^2.1.5",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "tailwind-merge": "^3.7.0",
     "taro-fetch-polyfill": "^0.5.8",
-    "web-utility": "^4.7.2"
+    "web-utility": "^4.8.1"
   },
   "devDependencies": {
-    "@swc/core": "^1.16.2",
-    "@tailwindcss/postcss": "^4.3.3",
+    "@swc/core": "^1.16.21",
+    "@tailwindcss/postcss": "^4.3.4",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/node": "^26.6.2",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "cross-env": "^10.1.0",
-    "eslint": "^10.11.0",
+    "eslint": "^10.14.0",
     "eslint-idea2app-tsx": "^0.5.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.5.1",
-    "prettier": "^3.9.8",
+    "lint-staged": "^17.6.0",
+    "oxc-transform-react": "^0.157.0",
+    "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "rolldown": "1.2.9",
-    "tailwindcss": "^4.3.3",
+    "rolldown": "1.2.15",
+    "tailwindcss": "^4.3.4",
     "typescript": "^6.0.3",
-    "unplugin-swc": "^1.6.0",
-    "vite": "8.3.0",
-    "vite-plugin-taro": "^0.7.7"
+    "unplugin-swc": "^2.0.0",
+    "vite": "8.3.5",
+    "vite-plugin-taro": "0.8.5"
   },
   "resolutions": {
     "@types/react": "$@types/react",
