@@ -281,8 +281,8 @@ importers:
         specifier: 8.3.5
         version: 8.3.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
       vite-plugin-taro:
-        specifier: 0.8.4
-        version: 0.8.4(oxc-transform-react@0.157.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: 0.8.5
+        version: 0.8.5(oxc-transform-react@0.157.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
 
 packages:
 
@@ -2709,15 +2709,15 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  vite-plugin-taro-runtime@0.8.4:
-    resolution: {integrity: sha512-HqCH8OUGn1xSiYzEL9+j/oI1hvrHcex78LLie+THfFOX4A9tf9YdXlRI4lFFEpTjTtPFKfr9XF2OkJwhgi9COA==}
+  vite-plugin-taro-runtime@0.8.5:
+    resolution: {integrity: sha512-bwVQUJIJskw0CVpiWPJQmLG3esyKBf/u9wPsW5M3i+H0KQi7cr5ZTdFXNOAKhNu7F6MtWRht7Z6e1iyJhJs1pQ==}
     engines: {node: '>=22'}
     peerDependencies:
       react: ^19.3.1
       react-dom: ^19.3.1
 
-  vite-plugin-taro@0.8.4:
-    resolution: {integrity: sha512-NXmjS+CX1Uc0eBgtxQm6X1eDKM8Xp2haavfkZCMo4xptaULQTEHna/sl4OsXe/JpXWs0sVXwmOJf+m29GIZXQQ==}
+  vite-plugin-taro@0.8.5:
+    resolution: {integrity: sha512-0SzLq5KCKJxzwuDb7Mk0c9SZtyb5k3helEZNNl0pDaYTWBmkshBnQnWmEyRlO1GF1S6yLFvFjDtObIZVCo3SdQ==}
     engines: {node: ^22.18.0 || >=24.11.0}
     peerDependencies:
       react: ^19.3.1
@@ -5235,7 +5235,7 @@ snapshots:
     dependencies:
       react: 19.3.1
 
-  vite-plugin-taro-runtime@0.8.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  vite-plugin-taro-runtime@0.8.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
       '@stencil/core': 2.22.3
       '@tarojs/shared': 4.3.1
@@ -5259,7 +5259,7 @@ snapshots:
       universal-router: 9.2.1
       whatwg-fetch: 3.6.20
 
-  vite-plugin-taro@0.8.4(oxc-transform-react@0.157.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)):
+  vite-plugin-taro@0.8.5(oxc-transform-react@0.157.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vite@8.3.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
       '@tailwindcss/node': 4.3.3
       '@tailwindcss/oxide': 4.3.3
@@ -5275,7 +5275,7 @@ snapshots:
       sval: 0.6.12
       tailwindcss: 4.3.4
       vite: 8.3.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
-      vite-plugin-taro-runtime: 0.8.4(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      vite-plugin-taro-runtime: 0.8.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
     transitivePeerDependencies:
       - '@rolldown/plugin-babel'
       - babel-plugin-react-compiler
